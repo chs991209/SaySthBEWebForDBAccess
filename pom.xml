@@ -30,8 +30,6 @@
         <java.version>21</java.version>
         <spring-ai.version>1.0.0</spring-ai.version>
         <spring-modulith.version>1.4.0</spring-modulith.version>
-        <artifactId>spring-restdocs-asciidoctor</artifactId>
-        <version>3.0.3</version>
     </properties>
     <dependencies>
         <dependency>
@@ -204,16 +202,13 @@
                         <configuration>
                             <backend>html</backend>
                             <doctype>book</doctype>
+                            <attributes>
+                                <snippets>${project.build.directory}/generated-snippets</snippets>
+                            </attributes>
                         </configuration>
                     </execution>
                 </executions>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.springframework.restdocs</groupId>
-                        <artifactId>spring-restdocs-asciidoctor</artifactId>
-                        <version>${spring-restdocs.version}</version>
-                    </dependency>
-                </dependencies>
+
             </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -221,6 +216,5 @@
             </plugin>
         </plugins>
     </build>
-
 
 </project>

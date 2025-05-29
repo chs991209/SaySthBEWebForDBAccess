@@ -1,26 +1,26 @@
 services:
-  mongodbatlas:
-    image: 'mongodb/mongodb-atlas-local:latest'
-    ports:
-      - '27017'
+#  mongodbatlas:
+#    image: 'mongodb/mongodb-atlas-local:latest'
+#    ports:
+#      - '27017'
   mysql:
-    image: 'mysql:latest'
+    image: 'mysql:8.4.3'
     environment:
-      - 'MYSQL_DATABASE=mydatabase'
-      - 'MYSQL_PASSWORD=secret'
-      - 'MYSQL_ROOT_PASSWORD=verysecret'
-      - 'MYSQL_USER=myuser'
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_USER=${MYSQL_USER}
     ports:
-      - '3306'
-  ollama:
-    image: 'ollama/ollama:latest'
-    ports:
-      - '11434'
-  postgres:
-    image: 'postgres:latest'
-    environment:
-      - 'POSTGRES_DB=mydatabase'
-      - 'POSTGRES_PASSWORD=secret'
-      - 'POSTGRES_USER=myuser'
-    ports:
-      - '5432'
+      - ${MYSQL_PORT}
+#  ollama:
+#    image: 'ollama/ollama:latest'
+#    ports:
+#      - '11434'
+#  postgres:
+#    image: 'postgres:latest'
+#    environment:
+#      - 'POSTGRES_DB=mydatabase'
+#      - 'POSTGRES_PASSWORD=secret'
+#      - 'POSTGRES_USER=myuser'
+#    ports:
+#      - '5432'
