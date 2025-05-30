@@ -1,26 +1,23 @@
 services:
-#  mongodbatlas:
-#    image: 'mongodb/mongodb-atlas-local:latest'
-#    ports:
-#      - '27017'
   mysql:
-    image: 'mysql:8.4.3'
+    image: mysql:8.4.3
+    container_name: mysql-local
+    restart: unless-stopped
     environment:
       - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - MYSQL_USER=${MYSQL_USER}
     ports:
-      - ${MYSQL_PORT}
-#  ollama:
-#    image: 'ollama/ollama:latest'
-#    ports:
-#      - '11434'
-#  postgres:
-#    image: 'postgres:latest'
-#    environment:
-#      - 'POSTGRES_DB=mydatabase'
-#      - 'POSTGRES_PASSWORD=secret'
-#      - 'POSTGRES_USER=myuser'
-#    ports:
-#      - '5432'
+      - "${MYSQL_PORT}:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - backend
+
+volumes:
+  mysql-data: {}
+
+networks:
+  backend:
+    driver: bridge
